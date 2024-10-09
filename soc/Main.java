@@ -5,11 +5,13 @@ import java.util.*;
 public class Main {
 	private static Scanner scanner = new Scanner(System.in);
 	private static Map<String, Account> accounts = new HashMap<>();
-	private static Account currentAccount = null;
+	protected static Account currentAccount = null;
 	private static List<Post> postList = new ArrayList<>();
 
 	public static void main(String[] args) {
-
+		
+		accounts.put("admin", new Account("admin","admin"));
+		
 		String input = "";
 
 		boolean isRunning = true;
@@ -86,6 +88,7 @@ public class Main {
 
 			if (accounts.containsKey(userName) == true && accounts.get(userName).getUserPassword().equals(password)) {
 				System.out.println("Account login successfully!! Press any key to continue!!");
+				Account currentAccount = accounts.get(userName);
 				scanner.nextLine();
 				viewPost();
 				break;

@@ -52,10 +52,6 @@ public class Main {
 
 		}
 		System.out.println("Program terminated");
-
-//        
-//       	Views.newPostWindow(currentAccount);
-//       	Views.displayTextArtOptions(currentAccount);
 	}
 
 	private static void register() {
@@ -71,7 +67,7 @@ public class Main {
 			System.out.println("The username " + userName + " is already taken!! Press any key to return!!");
 		} else {
 			accounts.put(userName, new Account(userName, password, phoneNumber));
-			System.out.println("Account created successfully!!\nPress any key to return...");
+			System.out.println("Account created successfully!! Press any key to return...");
 		}
 		scanner.nextLine();
 		Views.mainWindow();
@@ -87,14 +83,14 @@ public class Main {
 
 			if (accounts.containsKey(userName) == true && accounts.get(userName).getUserPassword().equals(password)) {
 				System.out.println(
-						"Account login successfully!! Welcome " + userName + "!!" + "\nPress any key to continue...");
+						"Account login successfully!! Welcome " + userName + "!!" + " Press any key to continue...");
 				currentAccount = accounts.get(userName);
 				scanner.nextLine();
 				viewPost();
 				break;
 			} else {
 				System.out
-						.println("Invalid username or password. Please try again bruh!!\nPress any key to continue...");
+						.println("Invalid username or password. Please try again bruh!! Press any key to continue...");
 				scanner.nextLine();
 				Views.mainWindow();
 				break;
@@ -223,7 +219,7 @@ public class Main {
 	}
 
 	private static void postText() {
-		System.out.print("Enter your text(less than 40 characters): ");
+		System.out.print("Enter your text: ");
 		input = scanner.nextLine();
 		postList.add(new TextPost(currentAccount,input));
 	}

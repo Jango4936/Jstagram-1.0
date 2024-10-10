@@ -123,6 +123,7 @@ public class Main {
 			switch (Character.toLowerCase(option)) {
 			case '+':
 				newPost();
+				Views.postViewWindow(postList, currentAccount);
 				break;
 			case 'l':
 				currentAccount = null;
@@ -143,7 +144,8 @@ public class Main {
 
 	private static void newPost() {
 		Views.newPostWindow(currentAccount);
-		while (true) {
+		boolean status = true;
+		while (status == true) {
 			do {
 				System.out.print("Choose: ");
 				input = scanner.nextLine();
@@ -161,20 +163,25 @@ public class Main {
 			switch (Character.toLowerCase(option)) {
 			case 't':
 				postText();
+				status = false;
 				break;
 			case 'a':
 				postTextArt();
+				status = false;
 				break;
 			default:
 				System.out.println("Invalid input. Please enter 'T' or 'A'");
 			}
-
+			if (status == false) {
+				break;
+			}
 		}
 	}
 
 	private static void postTextArt() {
 		Views.displayTextArtOptions(currentAccount);
-		while (true) {
+		boolean status = true;
+		while (status == true) {
 			do {
 				System.out.print("Choose: ");
 				input = scanner.nextLine();
@@ -191,25 +198,33 @@ public class Main {
 			char option = input.charAt(0);
 			switch (Character.toLowerCase(option)) {
 			case '0':
-				
+				postList.add(new TextArtPost(currentAccount,'0'));
+				status = false;
 				break;
 			case '1':
-
+				postList.add(new TextArtPost(currentAccount,'1'));
+				status = false;
 				break;
 			case '2':
-
+				postList.add(new TextArtPost(currentAccount,'2'));
+				status = false;
 				break;
 			case '3':
-
+				postList.add(new TextArtPost(currentAccount,'3'));
+				status = false;
 				break;
 			default:
 				System.out.println("Invalid input. Please enter a number");
+			}
+			if (status == false) {
+				break;
 			}
 		}
 	}
 
 	private static void postText() {
-		// TODO Auto-generated method stub
-
+		System.out.print("Enter your text(less than 40 characters): ");
+		input = scanner.nextLine();
+		postList.add(new TextPost(currentAccount,input));
 	}
 }

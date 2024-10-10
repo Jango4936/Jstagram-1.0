@@ -85,7 +85,9 @@ public class Views {
         System.out.println(" ========================================");
         for (Post p : posts) {
             System.out.print(p.getFormattedContent());
+            System.out.printf("|%40s|\n", "");
             System.out.printf("|%40s|\n", p.tag());
+            System.out.printf("|----------------------------------------|\n");
         }
         System.out.println("|  New Post(+) or Logout(L) or Quit(Q)   |");
         if (currentAccount != null)

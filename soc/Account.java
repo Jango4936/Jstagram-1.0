@@ -5,6 +5,13 @@ public class Account implements ContentFormatter{
     private final String userPassword;
     private final String userPhoneNum;
     
+    Account(String userName, String userPassword){
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userPhoneNum = null;
+    	
+    }
+    
     Account(String userName, String userPassword, String userPhoneNum){
 		this.userName = userName;
 		this.userPassword = userPassword;

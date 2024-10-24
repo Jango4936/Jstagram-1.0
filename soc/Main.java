@@ -76,6 +76,7 @@ public class Main {
 	}
 
 	private static void login() {
+		sortPost('+'); // Set post order to default order every time we login
 		Views.accountLoginWindow();
 		while (true) {
 			System.out.print("Enter UserName: ");
@@ -129,7 +130,12 @@ public class Main {
 				break;
 			case 's':
 				settingsMenu();
-				Views.postViewWindow(postList, currentAccount);
+				if (currentAccount == null) {
+					Views.mainWindow();
+				} else {
+					Views.postViewWindow(postList, currentAccount);
+				}
+				
 				break;
 			case 'l':
 				currentAccount = null;
@@ -167,35 +173,72 @@ public class Main {
 			} while (input.isBlank() || input.length() > 1);
 
 			char option = input.charAt(0);
-			switch (Character.toLowerCase(option)) {
-			case '+':
-				
-				status = false;
-				break;
-			case '-':
-				
-				status = false;
-				break;
-			case '*':
-				
-				status = false;
-				break;
-			case '=':
-
-				status = false;
-				break;
-			default:
-				System.out.println("Invalid input. Please enter 'T' or 'A'");
-			}
+			status = sortPost(option);
+			
 			if (status == false) {
 				break;
 			}
 		}
 	}
+	
+	private static boolean sortPost(char option) {
+		switch (Character.toLowerCase(option)) {
+		case '+':
+			Collections.sort(postList, Comparator.comparing(Post::postTime)); //Sort by Ascending Order of Time
+			return false;
+		case '-':
+			Collections.sort(postList, (p1, p2) -> p2.postTime().compareTo(p1.postTime())); //Sort by Descending Order of Time
+			return false;
+		case '*':
+			Collections.sort(postList, Comparator.comparing(post -> post.getPostAccount().getUsername())); //Sort by Ascending Order of UserName
+			return false;
+		case '=':
+			Collections.sort(postList, Comparator.comparing(post -> ((Post) post).getPostAccount().getUsername()).reversed()); //Sort by Descending Order of UserName
+			return false;
+		default:
+			System.out.println("Invalid input. Please enter a correct options!!!");
+			return true;
+		}
+	}
 
 	private static void settingsMenu() {
-		// TODO Auto-generated method stub
+		Views.displayAccountSettings(currentAccount);
+		boolean status = true;
+		while (status == true) {
+			do {
+				System.out.print("Choose: ");
+				input = scanner.nextLine();
+				if (!input.isEmpty() && input.length() == 1) {
+					break;
+				} else if (input.isBlank()) {
+					System.out.println("Invalid input, please don't leave it blank");
+				} else if (input.length() > 1) {
+					System.out.println("Invalid input, please enter only 1 character!!");
+				}
 
+			} while (input.isBlank() || input.length() > 1);
+
+			char option = input.charAt(0);
+			switch (Character.toLowerCase(option)) {
+			case '-':
+				accounts.remove(currentAccount.getUsername());
+				for (int i = 0; i < postList.size(); i++) {
+					if(postList.get(i).postAccount.equals(currentAccount)) {
+						postList.remove(i);
+						i--;
+					}
+				}
+				currentAccount = null;
+				
+				status = false;
+				break;
+			default:
+				System.out.println("Invalid input. Please enter a correct options!!");
+			}
+			if (status == false) {
+				break;
+			}
+		}
 	}
 
 	private static void newPost() {

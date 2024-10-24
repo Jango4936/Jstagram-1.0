@@ -56,17 +56,19 @@ public class Main {
 
 	private static void register() {
 		Views.accountRegistrationWindow();
-		System.out.print("Enter UserName: ");
+		System.out.print("Enter Username: ");
 		String userName = scanner.nextLine();
-		System.out.print("Enter password: ");
+		System.out.print("Enter Password: ");
 		String password = scanner.nextLine();
-		System.out.print("Enter phoneNumber: ");
+		System.out.print("Enter Phone Number: ");
 		String phoneNumber = scanner.nextLine();
+		System.out.print("Enter Email: ");
+		String email = scanner.nextLine();
 
 		if (accounts.containsKey(userName) == true) {
 			System.out.println("The username " + userName + " is already taken!! Press any key to return!!");
 		} else {
-			accounts.put(userName, new Account(userName, password, phoneNumber));
+			accounts.put(userName, new Account(userName, password, phoneNumber, email));
 			System.out.println("Account created successfully!! Press any key to return...");
 		}
 		scanner.nextLine();
@@ -121,6 +123,14 @@ public class Main {
 				newPost();
 				Views.postViewWindow(postList, currentAccount);
 				break;
+			case '*':
+				sortOptions();
+				Views.postViewWindow(postList, currentAccount);
+				break;
+			case 's':
+				settingsMenu();
+				Views.postViewWindow(postList, currentAccount);
+				break;
 			case 'l':
 				currentAccount = null;
 				Views.mainWindow();
@@ -128,6 +138,7 @@ public class Main {
 			case 'q':
 				isRunning = false;
 				break;
+
 			default:
 				System.out.println("Invalid input. Please enter '+', 'L', or 'Q'");
 			}
@@ -135,6 +146,55 @@ public class Main {
 				break;
 			}
 		}
+
+	}
+
+	private static void sortOptions() {
+		Views.displayPostSortOption(currentAccount);
+		boolean status = true;
+		while (status == true) {
+			do {
+				System.out.print("Choose: ");
+				input = scanner.nextLine();
+				if (!input.isEmpty() && input.length() == 1) {
+					break;
+				} else if (input.isBlank()) {
+					System.out.println("Invalid input, please don't leave it blank");
+				} else if (input.length() > 1) {
+					System.out.println("Invalid input, please enter only 1 character!!");
+				}
+
+			} while (input.isBlank() || input.length() > 1);
+
+			char option = input.charAt(0);
+			switch (Character.toLowerCase(option)) {
+			case '+':
+				
+				status = false;
+				break;
+			case '-':
+				
+				status = false;
+				break;
+			case '*':
+				
+				status = false;
+				break;
+			case '=':
+
+				status = false;
+				break;
+			default:
+				System.out.println("Invalid input. Please enter 'T' or 'A'");
+			}
+			if (status == false) {
+				break;
+			}
+		}
+	}
+
+	private static void settingsMenu() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -194,19 +254,19 @@ public class Main {
 			char option = input.charAt(0);
 			switch (Character.toLowerCase(option)) {
 			case '0':
-				postList.add(new TextArtPost(currentAccount,'0'));
+				postList.add(new TextArtPost(currentAccount, '0'));
 				status = false;
 				break;
 			case '1':
-				postList.add(new TextArtPost(currentAccount,'1'));
+				postList.add(new TextArtPost(currentAccount, '1'));
 				status = false;
 				break;
 			case '2':
-				postList.add(new TextArtPost(currentAccount,'2'));
+				postList.add(new TextArtPost(currentAccount, '2'));
 				status = false;
 				break;
 			case '3':
-				postList.add(new TextArtPost(currentAccount,'3'));
+				postList.add(new TextArtPost(currentAccount, '3'));
 				status = false;
 				break;
 			default:
@@ -221,6 +281,6 @@ public class Main {
 	private static void postText() {
 		System.out.print("Enter your text: ");
 		input = scanner.nextLine();
-		postList.add(new TextPost(currentAccount,input));
+		postList.add(new TextPost(currentAccount, input));
 	}
 }

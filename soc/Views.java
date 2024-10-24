@@ -46,7 +46,7 @@ public class Views {
 		System.out.println("|         * User Name   _______          |");
 		System.out.println("|         * Password    _______          |");
 		System.out.println("|         * Phone Num   _______          |");
-		System.out.println("|                                        |");
+		System.out.println("|         * Email       _______          |");
 		System.out.println("|                                        |");
 		System.out.println("|                                        |");
 		System.out.println("|                                        |");
@@ -90,7 +90,9 @@ public class Views {
 			System.out.printf("|%40s|\n", p.tag());
 			System.out.printf("|----------------------------------------|\n");
 		}
-		System.out.println("|  New Post(+) or Logout(L) or Quit(Q)   |");
+		System.out.println("|  New Post(+) or Sort(*) or Settings(S) |");
+		System.out.println("|          Logout(L) or Quit(Q)          |");
+		System.out.println("|----------------------------------------|");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");
@@ -123,5 +125,18 @@ public class Views {
 		System.out.println(" ========================================");
 		System.out.print(ANSI_RESET);
 	}
-
+	
+	public static void displayPostSortOption(Account currentAccount) {
+		System.out.print(ANSI_Cyan);
+		System.out.println(" ========================================");
+		System.out.println("|  (+) Accending Order of Time           |");
+		System.out.println("|  (-) Deccending Order of Time          |");
+		System.out.println("|  (*) Accending Order of Usernames      |");
+		System.out.println("|  (=) Deccending Order of Usernames     |");
+		if (currentAccount != null)
+			System.out.print(currentAccount.getFormattedContent());
+		System.out.println(" ========================================");
+		System.out.print(ANSI_RESET);
+	}
+	
 }

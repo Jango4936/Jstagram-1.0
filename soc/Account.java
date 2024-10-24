@@ -4,18 +4,21 @@ public class Account implements ContentFormatter{
     private final String userName;
     private final String userPassword;
     private final String userPhoneNum;
+    private final String userEmail;
     
     Account(String userName, String userPassword){
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userPhoneNum = null;
+		this.userEmail = null;
     	
     }
     
-    Account(String userName, String userPassword, String userPhoneNum){
+    Account(String userName, String userPassword, String userPhoneNum, String userEmail){
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userPhoneNum = userPhoneNum;
+		this.userEmail = userEmail;
     	
     }
     

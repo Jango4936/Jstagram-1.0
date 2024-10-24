@@ -31,6 +31,11 @@ public class Account implements ContentFormatter{
     public String getUserPhoneNum() {
         return userPhoneNum;
     }
+    public String getuserEmail() {
+        return userEmail;
+    }
+    
+    
     
 
     @Override

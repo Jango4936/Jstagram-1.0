@@ -129,10 +129,22 @@ public class Views {
 	public static void displayPostSortOption(Account currentAccount) {
 		System.out.print(ANSI_Cyan);
 		System.out.println(" ========================================");
-		System.out.println("|  (+) Accending Order of Time           |");
-		System.out.println("|  (-) Deccending Order of Time          |");
-		System.out.println("|  (*) Accending Order of Usernames      |");
-		System.out.println("|  (=) Deccending Order of Usernames     |");
+		System.out.println("|  (+) Ascending Order of Time           |");
+		System.out.println("|  (-) Descending Order of Time          |");
+		System.out.println("|  (*) Ascending Order of Usernames      |");
+		System.out.println("|  (=) Descending Order of Usernames     |");
+		if (currentAccount != null)
+			System.out.print(currentAccount.getFormattedContent());
+		System.out.println(" ========================================");
+		System.out.print(ANSI_RESET);
+	}
+	
+	public static void displayAccountSettings(Account currentAccount) {
+		System.out.print(ANSI_Cyan);
+		System.out.println(" ========================================");
+		System.out.println("|                                        |");
+		System.out.println("|  (-) Delete Current User Account       |");
+		System.out.println("|                                        |");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");

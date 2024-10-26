@@ -4,16 +4,18 @@ import java.util.*;
 
 public class Main {
 	private static Scanner scanner = new Scanner(System.in);
-	private static Map<String, Account> accounts = new HashMap<>();
 	private static Account currentAccount = null;
-	private static List<Post> postList = new ArrayList<>();
 	private static String input = "";
 	private static boolean isRunning = true;
-
+	
+	private static Map<String, Account> accounts = new HashMap<>();
+	private static List<Post> postList = new ArrayList<>();
+	
 	public static void main(String[] args) {
 
 		accounts.put("admin", new Account("admin", "admin"));
-
+		
+		
 		while (isRunning == true) {
 			Views.mainWindow();
 
@@ -135,7 +137,7 @@ public class Main {
 				} else {
 					Views.postViewWindow(postList, currentAccount);
 				}
-				
+
 				break;
 			case 'l':
 				currentAccount = null;
@@ -144,15 +146,66 @@ public class Main {
 			case 'q':
 				isRunning = false;
 				break;
+			case '$':
+				if (currentAccount.getUsername().equals("admin")) {
+					adminMenu();
+				} else {
+					System.out.println("Invalid input. Please enter a valid option");
+				}
+				break;
 
 			default:
-				System.out.println("Invalid input. Please enter '+', 'L', or 'Q'");
+				System.out.println("Invalid input. Please enter a valid option");
 			}
 			if (isRunning == false || currentAccount == null) {
 				break;
 			}
 		}
 
+	}
+
+	private static void adminMenu() {
+		Views.displayAdminMenu(currentAccount);
+		boolean status = true;
+		while (status == true) {
+			do {
+				System.out.print("Choose: ");
+				input = scanner.nextLine();
+				if (!input.isEmpty() && input.length() == 1) {
+					break;
+				} else if (input.isBlank()) {
+					System.out.println("Invalid input, please don't leave it blank");
+				} else if (input.length() > 1) {
+					System.out.println("Invalid input, please enter only 1 character!!");
+				}
+
+			} while (input.isBlank() || input.length() > 1);
+
+			char option = input.charAt(0);
+			switch (Character.toLowerCase(option)) {
+			case '+':
+				DataManager.saveCurrentData(accounts, postList);
+				Views.postViewWindow(postList, currentAccount);
+				System.out.println("All accounts and posts saved succesfully!!");
+				status = false;
+				break;
+			case '-':
+				DataManager.loadLastSavedData(accounts, postList);
+				Views.postViewWindow(postList, currentAccount);
+				System.out.println("All accounts and posts loaded succesfully!!");
+				status = false;
+				break;
+			case 'r':
+				Views.postViewWindow(postList, currentAccount);
+				status = false;
+				break;
+			default:
+				System.out.println("Invalid input. Please enter a valid options!!");
+			}
+			if (status == false) {
+				break;
+			}
+		}
 	}
 
 	private static void sortOptions() {
@@ -174,29 +227,37 @@ public class Main {
 
 			char option = input.charAt(0);
 			status = sortPost(option);
-			
+
 			if (status == false) {
 				break;
 			}
 		}
 	}
-	
+
 	private static boolean sortPost(char option) {
 		switch (Character.toLowerCase(option)) {
 		case '+':
-			Collections.sort(postList, Comparator.comparing(Post::postTime)); //Sort by Ascending Order of Time
+			Collections.sort(postList, Comparator.comparing(Post::getPostTime)); // Sort by Ascending Order of Time
 			return false;
 		case '-':
-			Collections.sort(postList, (p1, p2) -> p2.postTime().compareTo(p1.postTime())); //Sort by Descending Order of Time
+			Collections.sort(postList, (p1, p2) -> p2.getPostTime().compareTo(p1.getPostTime())); // Sort by Descending Order
+																							// of Time
 			return false;
 		case '*':
-			Collections.sort(postList, Comparator.comparing(post -> post.getPostAccount().getUsername())); //Sort by Ascending Order of UserName
+			Collections.sort(postList, Comparator.comparing(post -> post.getPostAccount().getUsername())); // Sort by
+																											// Ascending
+																											// Order of
+																											// UserName
 			return false;
 		case '=':
-			Collections.sort(postList, Comparator.comparing(post -> ((Post) post).getPostAccount().getUsername()).reversed()); //Sort by Descending Order of UserName
+			Collections.sort(postList,
+					Comparator.comparing(post -> ((Post) post).getPostAccount().getUsername()).reversed()); // Sort by
+																											// Descending
+																											// Order of
+																											// UserName
 			return false;
 		default:
-			System.out.println("Invalid input. Please enter a correct options!!!");
+			System.out.println("Invalid input. Please enter a valid options!!!");
 			return true;
 		}
 	}
@@ -223,17 +284,21 @@ public class Main {
 			case '-':
 				accounts.remove(currentAccount.getUsername());
 				for (int i = 0; i < postList.size(); i++) {
-					if(postList.get(i).postAccount.equals(currentAccount)) {
+					if (postList.get(i).postAccount.equals(currentAccount)) {
 						postList.remove(i);
 						i--;
 					}
 				}
 				currentAccount = null;
-				
+
+				status = false;
+				break;
+			case 'r':
+				Views.postViewWindow(postList, currentAccount);
 				status = false;
 				break;
 			default:
-				System.out.println("Invalid input. Please enter a correct options!!");
+				System.out.println("Invalid input. Please enter a valid options!!");
 			}
 			if (status == false) {
 				break;

@@ -11,8 +11,12 @@ public abstract class Post implements ContentFormatter {
     	this.postAccount = postAccount;
     	this.postTime = LocalDateTime.now();
     }
+    Post(Account postAccount, LocalDateTime postTime){
+    	this.postAccount = postAccount;
+    	this.postTime = postTime;
+    }
     
-    public LocalDateTime postTime () {
+    public LocalDateTime getPostTime () {
     	return postTime;
     }
     

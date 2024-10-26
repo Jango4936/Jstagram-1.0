@@ -91,6 +91,8 @@ public class Views {
 			System.out.printf("|----------------------------------------|\n");
 		}
 		System.out.println("|  New Post(+) or Sort(*) or Settings(S) |");
+		if (currentAccount.getUsername().equals("admin"))
+			System.out.println("|              Admin Menu($)             |");
 		System.out.println("|          Logout(L) or Quit(Q)          |");
 		System.out.println("|----------------------------------------|");
 		if (currentAccount != null)
@@ -103,6 +105,7 @@ public class Views {
 		System.out.print(ANSI_Cyan);
 		System.out.println(" ========================================");
 		System.out.println("|  Text Post(T) or Text Art Post(A)      |");
+		System.out.printf("|----------------------------------------|\n");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");
@@ -120,6 +123,7 @@ public class Views {
 			System.out.printf("|%40s|\n", "");
 		}
 		System.out.println("|    Which Text Art do you choose?       |");
+		System.out.printf("|----------------------------------------|\n");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");
@@ -133,6 +137,7 @@ public class Views {
 		System.out.println("|  (-) Descending Order of Time          |");
 		System.out.println("|  (*) Ascending Order of Usernames      |");
 		System.out.println("|  (=) Descending Order of Usernames     |");
+		System.out.printf("|----------------------------------------|\n");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");
@@ -142,9 +147,22 @@ public class Views {
 	public static void displayAccountSettings(Account currentAccount) {
 		System.out.print(ANSI_Cyan);
 		System.out.println(" ========================================");
-		System.out.println("|                                        |");
-		System.out.println("|  (-) Delete Current User Account       |");
-		System.out.println("|                                        |");
+		System.out.println("|   (-) Delete Current User Account      |");
+		System.out.println("|   (R) Return to Main Page              |");
+		System.out.printf("|----------------------------------------|\n");
+		if (currentAccount != null)
+			System.out.print(currentAccount.getFormattedContent());
+		System.out.println(" ========================================");
+		System.out.print(ANSI_RESET);
+	}
+	
+	public static void displayAdminMenu(Account currentAccount) {
+		System.out.print(ANSI_Cyan);
+		System.out.println(" ========================================");
+		System.out.println("|   (+) Save All account & Post          |");
+		System.out.println("|   (-) Load all Account & Post          |");
+		System.out.println("|   (R) Return to Main Page              |");
+		System.out.printf("|----------------------------------------|\n");
 		if (currentAccount != null)
 			System.out.print(currentAccount.getFormattedContent());
 		System.out.println(" ========================================");

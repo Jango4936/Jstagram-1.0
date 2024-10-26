@@ -31,7 +31,7 @@ public class Account implements ContentFormatter{
     public String getUserPhoneNum() {
         return userPhoneNum;
     }
-    public String getuserEmail() {
+    public String getUserEmail() {
         return userEmail;
     }
     

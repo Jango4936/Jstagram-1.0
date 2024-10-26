@@ -1,0 +1,14 @@
+#Accounts
+Kai|12345|0128856868|kai22@gmail.com
+Alice|12345|012338578588|alice@gmail.com
+admin|admin|null|null
+bob11|123|012449599|bob112gmail.com
+#Posts
+Alice|2024-10-26T02:40:45.594929600|TextArtPost|0
+Alice|2024-10-26T02:41:10.674032400|TextPost|Hi, Im Alice, this is my house!!
+Kai|2024-10-26T02:41:37.329014700|TextArtPost|2
+Kai|2024-10-26T02:41:52.075944900|TextPost|i love java :))))))
+bob11|2024-10-26T02:42:10.344651400|TextArtPost|3
+bob11|2024-10-26T02:42:17.247630100|TextArtPost|1
+bob11|2024-10-26T02:42:27.759385200|TextPost|this is my dog
+admin|2024-10-26T02:42:46.623319400|TextPost|hi guys im admin!!!!

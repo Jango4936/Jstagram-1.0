@@ -1,10 +1,17 @@
 package unl.soc;
 
+import java.time.LocalDateTime;
+
 public class TextPost extends Post {
 	protected String textContent;
 	
 	TextPost(Account postAccount, String textContent){
 		super(postAccount);
+		this.textContent = textContent;
+	}
+	
+	TextPost(Account postAccount, LocalDateTime postTime, String textContent){
+		super(postAccount, postTime);
 		this.textContent = textContent;
 	}
 	

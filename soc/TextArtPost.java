@@ -1,5 +1,6 @@
 package unl.soc;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TextArtPost extends Post {
@@ -8,6 +9,11 @@ public class TextArtPost extends Post {
 	
 	TextArtPost(Account postAccount, char choiceOfArt) {
 		super(postAccount);
+		this.choiceOfArt = choiceOfArt;
+	}
+	
+	TextArtPost(Account postAccount, LocalDateTime postTime, char choiceOfArt) {
+		super(postAccount, postTime);
 		this.choiceOfArt = choiceOfArt;
 	}
 	

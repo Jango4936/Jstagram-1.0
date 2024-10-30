@@ -7,22 +7,24 @@ public class Main {
 	private static Account currentAccount = null;
 	private static String input = "";
 	private static boolean isRunning = true;
-	
+
 	private static Map<String, Account> accounts = new HashMap<>();
 	private static List<Post> postList = new ArrayList<>();
-	
+
 	public static void main(String[] args) {
 
-		accounts.put("admin", new Account("admin", "admin"));
-		
-		
+		accounts.put("admin", new Account("admin", "admin")); // pre-registered admin account
+
+		// loop the program as long as it's not terminated by user
 		while (isRunning == true) {
-			Views.mainWindow();
+			Views.mainWindow(); // call mainmenu page
 
 			while (true) {
+
 				do {
 					System.out.print("Choose: ");
 					input = scanner.nextLine();
+
 					if (!input.isEmpty() && input.length() == 1) {
 						break;
 					} else if (input.isBlank()) {
@@ -31,24 +33,26 @@ public class Main {
 						System.out.println("Invalid input, please enter only 1 character!!");
 					}
 
-				} while (input.isBlank() || input.length() > 1);
+				} while (input.isBlank() || input.length() > 1); // loop and make sure user input is valid
 
-				char option = input.charAt(0);
+				char option = input.charAt(0); // option variable store user's current choice
+
 				switch (Character.toLowerCase(option)) {
 				case 'r':
-					register();
+					register(); // if user choose r, call register method
 					break;
 				case 'l':
-					login();
+					login(); // if user choose l, call login method
 					break;
 				case 'q':
-					isRunning = false;
+					isRunning = false; // if user choose q, terminated the program
 					break;
 				default:
-					System.out.println("Invalid input. Please enter 'r', 'l', or 'q'");
+					System.out.println("Invalid input. Please enter 'r', 'l', or 'q'"); // if user input incorrect
+																						// character
 				}
 				if (isRunning == false) {
-					break;
+					break; // terminated the program and end the while loop
 				}
 			}
 
@@ -56,8 +60,12 @@ public class Main {
 		System.out.println("Program terminated");
 	}
 
+	// register method for new account
 	private static void register() {
-		Views.accountRegistrationWindow();
+
+		Views.accountRegistrationWindow(); // call register menu
+
+		// ask user to enter their details
 		System.out.print("Enter Username: ");
 		String userName = scanner.nextLine();
 		System.out.print("Enter Password: ");
@@ -67,6 +75,7 @@ public class Main {
 		System.out.print("Enter Email: ");
 		String email = scanner.nextLine();
 
+		// check if current username exist in the memory
 		if (accounts.containsKey(userName) == true) {
 			System.out.println("The username " + userName + " is already taken!! Press any key to return!!");
 		} else {
@@ -74,32 +83,40 @@ public class Main {
 			System.out.println("Account created successfully!! Press any key to return...");
 		}
 		scanner.nextLine();
-		Views.mainWindow();
+		Views.mainWindow(); // going back to mainmenu
 	}
 
+	// login method for existing account
 	private static void login() {
 		sortPost('+'); // Set post order to default order every time we login
-		Views.accountLoginWindow();
-		while (true) {
+		Views.accountLoginWindow(); // call login page
+
+		
+
+			// ask user to enter their details
 			System.out.print("Enter UserName: ");
 			String userName = scanner.nextLine();
 			System.out.print("Enter password: ");
 			String password = scanner.nextLine();
 
+			// check if current username and password exist/correct in the memory
 			if (accounts.containsKey(userName) == true && accounts.get(userName).getUserPassword().equals(password)) {
+
 				System.out.println(
-						"Account login successfully!! Welcome " + userName + "!!" + " Press any key to continue...");
-				currentAccount = accounts.get(userName);
-				scanner.nextLine();
-				viewPost();
-				break;
+						"Account login successfully!! Welcome " + userName + "!!" + " Press any key to continue..."); // welcome
+																														// message
+
+				currentAccount = accounts.get(userName); // set current account to the current user
+				scanner.nextLine(); // pause gap :)
+				viewPost();	// call view post menu
+				
 			} else {
 				System.out
 						.println("Invalid username or password. Please try again bruh!! Press any key to continue...");
 				scanner.nextLine();
 				Views.mainWindow();
-				break;
-			}
+				
+			
 		}
 
 	}
@@ -240,8 +257,9 @@ public class Main {
 			Collections.sort(postList, Comparator.comparing(Post::getPostTime)); // Sort by Ascending Order of Time
 			return false;
 		case '-':
-			Collections.sort(postList, (p1, p2) -> p2.getPostTime().compareTo(p1.getPostTime())); // Sort by Descending Order
-																							// of Time
+			Collections.sort(postList, (p1, p2) -> p2.getPostTime().compareTo(p1.getPostTime())); // Sort by Descending
+																									// Order
+			// of Time
 			return false;
 		case '*':
 			Collections.sort(postList, Comparator.comparing(post -> post.getPostAccount().getUsername())); // Sort by

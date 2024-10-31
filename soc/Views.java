@@ -91,8 +91,11 @@ public class Views {
 			System.out.printf("|----------------------------------------|\n");
 		}
 		System.out.println("|  New Post(+) or Sort(*) or Settings(S) |");
+		
+		// show only when current account is admin
 		if (currentAccount.getUsername().equals("admin"))
 			System.out.println("|              Admin Menu($)             |");
+		
 		System.out.println("|          Logout(L) or Quit(Q)          |");
 		System.out.println("|----------------------------------------|");
 		if (currentAccount != null)

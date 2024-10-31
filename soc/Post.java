@@ -7,10 +7,13 @@ public abstract class Post implements ContentFormatter {
     protected LocalDateTime postTime;
     protected Account postAccount;
     
+    // constructor
     Post(Account postAccount){
     	this.postAccount = postAccount;
     	this.postTime = LocalDateTime.now();
     }
+    
+    // method overloading
     Post(Account postAccount, LocalDateTime postTime){
     	this.postAccount = postAccount;
     	this.postTime = postTime;

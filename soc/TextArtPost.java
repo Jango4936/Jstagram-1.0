@@ -8,12 +8,12 @@ public class TextArtPost extends Post {
 	
 	
 	TextArtPost(Account postAccount, char choiceOfArt) {
-		super(postAccount);
+		super(postAccount); // call parent class, Post
 		this.choiceOfArt = choiceOfArt;
 	}
-	
+	// method overloading
 	TextArtPost(Account postAccount, LocalDateTime postTime, char choiceOfArt) {
-		super(postAccount, postTime);
+		super(postAccount, postTime); // call parent class, Post
 		this.choiceOfArt = choiceOfArt;
 	}
 	
@@ -77,13 +77,13 @@ public class TextArtPost extends Post {
 	    int index = Character.getNumericValue(choiceOfArt);
 	    
 	    for (int i = 0; i < OPTIONS.get(index).length; i++) {
-	        // Get the current line of art
+	        // get the current line of art
 	        String artLine = OPTIONS.get(index)[i];
 	        
-	        // Ensure the line is padded to exactly 40 characters (left-aligned)
+	        // ensure the line is padded to exactly 40 characters (left-aligned)
 	        String paddedLine = String.format("%10s%-30s", "",artLine);
 	        
-	        // Append the formatted line with "|" on both sides
+	        // append the formatted line with "|" on both sides
 	        formattedText.append("|" + paddedLine + "|\n");
 	    }
 	    

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataManager {
-	private static String fileDirectory = "src\\unl\\soc\\save\\savefile.data";
+	private static String fileDirectory = "savefile.data";
 	
 	
 	// constructor
